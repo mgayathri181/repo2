@@ -8,4 +8,4 @@ Resources:
         TaskDefinition: imagedefinitions:1  # ECS task definition with the revision number
         LoadBalancerInfo:
           ContainerName: my-container  # Container name as defined in the task definition
-          ContainerPort: 80  # The container port exposed
+          ContainerPort: 8085  # The container port exposed
