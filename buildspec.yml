@@ -17,21 +17,19 @@ phases:
   build:
     commands:
       - echo Building the Docker image...
-      - docker build -t cicdncplimage .
-      - docker tag cicdncplimage:latest rajcosivadevops/cicdncplimage:latest
+      - docker build -t gayathrimurugaian/india .
+      - docker tag gayathrimurugaian/india:latest gayathrimurugaian/india:latest
 
   post_build:
     commands:
       - echo Pushing Docker image to Docker Hub...
-      - docker push rajcosivadevops/cicdncplimage:latest
+      - docker push gayathrimurugaian/india:latest
       - echo Writing imagedefinitions.json...
       - ls -l
-      - printf '[{"name":"sprinrajco","imageUri":"rajcosivadevops/cicdncplimage:latest"}]' > imagedefinitions.json
-      - echo Writing appspec.yml...
-      
+      - printf '[{"name":"my-container","imageUri":"gayathrimurugaian/india:latest"}]' > imagedefinitions.json
+      - echo Skipping appspec.yml (not needed for ECS deploy via CodePipeline)
 
 artifacts:
   files:
     - imagedefinitions.json
-    - appspec.yml
     - target/demo-1.0.0.jar
