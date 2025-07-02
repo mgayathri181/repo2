@@ -27,7 +27,7 @@ phases:
       - echo Writing imagedefinitions.json...
       - ls -l
       - printf '[{"name":"my-container","imageUri":"gayathrimurugaian/india:latest"}]' > imagedefinitions.json
-      - echo Skipping appspec.yml (not needed for ECS deploy via CodePipeline)
+      - echo "Skipping appspec.yml (not needed for ECS deploy via CodePipeline)"
 
 artifacts:
   files:
