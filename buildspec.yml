@@ -10,15 +10,17 @@ phases:
       - echo Building the JAR file...
       - mvn clean install
       - echo Logging in to Docker Hub...
-      - DOCKER_USERNAME=$(aws secretsmanager get-secret-value --secret-id docker-hub-credentials1 --query SecretString --output text | jq -r .DOCKER_USERNAME)
-      - DOCKER_PASSWORD=$(aws secretsmanager get-secret-value --secret-id docker-hub-credentials1 --query SecretString --output text | jq -r .DOCKER_PASSWORD)
+     # - DOCKER_USERNAME=$(aws secretsmanager get-secret-value --secret-id docker-hub-credentials1 --query SecretString --output text | jq -r .DOCKER_USERNAME)
+      #- DOCKER_PASSWORD=$(aws secretsmanager get-secret-value --secret-id docker-hub-credentials1 --query SecretString --output text | jq -r .DOCKER_PASSWORD)
+      - DOCKER_USERNAME="gayathrimurugaian"
+      - DOCKER_PASSWORD="Aug@12345#$%"
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
   build:
     commands:
       - echo Building the Docker image...
-      - docker build -t gayathrimurugaian/india .
-      - docker tag gayathrimurugaian/india:latest gayathrimurugaian/india:latest
+      - docker build -t india .
+      - docker tag india:latest gayathrimurugaian/india:latest
 
   post_build:
     commands:
@@ -27,8 +29,11 @@ phases:
       - echo Writing imagedefinitions.json...
       - ls -l
       - printf '[{"name":"my-container","imageUri":"gayathrimurugaian/india:latest"}]' > imagedefinitions.json
+      - echo Writing appspec.yml...
+     
 
 artifacts:
   files:
     - imagedefinitions.json
     - appspec.yml
+   # - target/demo-1.0.0.jar
